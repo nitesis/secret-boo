@@ -7,7 +7,7 @@
     <ProjectGuid>{438F61A5-BF32-4CD9-A61C-25758689E964}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RoutePlannerConsole</RootNamespace>
+    <RootNamespace>Fhnw.Ecnf.RoutePlanner.RoutePlannerConsole</RootNamespace>
     <AssemblyName>RoutePlannerConsole</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
