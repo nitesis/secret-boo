@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RoutePlannerConsole
 {
-    class Program
+    class RoutePlannerConsoleApp
     {
-        static void Main(string[] args)
+        static void Main(string[] args)     
         {
         }
     }
