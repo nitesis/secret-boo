@@ -1,2 +1,2 @@
 # secret-boo
-ecnf project
+ecnf project for beginners
