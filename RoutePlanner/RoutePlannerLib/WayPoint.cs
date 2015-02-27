@@ -20,5 +20,22 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             Longitude = _longitude;
         }
 
+
+        public override string ToString()
+            {
+                double lat = Math.Round(this.Latitude);
+                double lon=Math.Round(this.Longitude);
+                if((this.Name==null )|| (this.Name==""))
+                {
+                    lat = lat - (int)lat;
+                    lon = lon - (int)lon;
+                    return ("Way point:"+ lat+ lon);
+                }
+                
+               return ("Way point:"+ this.Name+ " "+ lat+"/" +lon);
+                
+                
+            }
+
     }
 }
