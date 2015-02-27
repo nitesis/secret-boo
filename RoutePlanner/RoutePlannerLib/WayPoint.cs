@@ -23,8 +23,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public override string ToString()
             {
-                double lat = Math.Round(this.Latitude);
-                double lon=Math.Round(this.Longitude);
+                double lat = Math.Round(this.Latitude,2);
+                double lon =Math.Round(this.Longitude,2);
                 if((this.Name==null )|| (this.Name==""))
                 {
                     lat = lat - (int)lat;
