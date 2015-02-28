@@ -10,7 +10,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
    public  class  WayPoint
     {
        
-       public const int Radius = 6371;
+        public const int Radius = 6371;
 
     
         public string Name { get; set; }
