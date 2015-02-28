@@ -10,7 +10,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
    public  class  WayPoint
     {
        
-       public const int radius = 6371;
+       public const int Radius = 6371;
 
     
         public string Name { get; set; }
@@ -41,16 +41,15 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 
                 
             }
-/*
+
         public double Distance(WayPoint target)
         {
             double distance;
-
-            distance = radius * arccos [sin (φa) •sin(φb) + cos(φa) • cos(φb) • cos(λa - λb)]
+            distance = Radius * Math.Acos (Math.Sin (this.Latitude) * Math.Sin(target.Latitude) + Math.Cos(this.Latitude) * Math.Cos(target.Latitude) * Math.Cos(this.Longitude - target.Longitude));
             return distance;
 
         }
- */
+ 
 
     }
 }
