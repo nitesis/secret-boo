@@ -52,6 +52,10 @@
       <Project>{590183ff-d85f-401b-898d-094cf5ec32d8}</Project>
       <Name>RoutePlannerLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RoutePlannerTest\RoutePlannerTest.csproj">
+      <Project>{83f549e2-89ac-4257-b4a9-8ee80c770d61}</Project>
+      <Name>RoutePlannerTest</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

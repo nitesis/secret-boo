@@ -10,36 +10,32 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
     public class Cities
     {
         List<City> cityList = new List<City>();
-        int count;
+        public int Count { get; set; }
+
         public int ReadCities(string filename)
         {
             TextReader reader = new StreamReader(filename); 
             String line = reader.ReadLine();
-            count = 0;
+            Count = 0;
             while (line != null)
             {
                 String[] lineSplit = line.Split('\t');
                 City newCity = new City(lineSplit[0], lineSplit[1], Convert.ToInt32(lineSplit[2]), Convert.ToDouble(lineSplit[3]), Convert.ToDouble(lineSplit[4]));
             
                 cityList.Add(newCity);
-                count++;
+                Count++;
                 line = reader.ReadLine();
             }
-            return count; 
+            return Count; 
             
         }
 
         public City GetCityPerIndex(int index)
         {
-            if (index < count || index > count)
+            if (index < Count || index > Count)
                 return null;
             else
                 return cityList.ElementAt(index);
-        }
-
-        public int GetCount()
-        {
-            return count;
         }
 
         public List<City> FindNeighbours(WayPoint location, double distance)
@@ -53,7 +49,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             WayPoint a=location;
             WayPoint b;
             //d = R arccos [sin (φa) •sin(φb) + cos(φa) • cos(φb) • cos(λa - λb)
-            for(int i=0; i<count; i++)
+            for(int i=0; i<Count; i++)
             {
                 city=GetCityPerIndex(i);
                 b=city.Location;
