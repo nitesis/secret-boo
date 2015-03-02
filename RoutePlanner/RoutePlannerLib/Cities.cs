@@ -42,6 +42,33 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             return count;
         }
 
+        public List<City> FindNeighbours(WayPoint location, double distance)
+        {
+            List<City> neighbours=new List<City>();
+            City city;
+            var R=6371;
+            double dAB;
+            double c;
+            double d;
+            WayPoint a=location;
+            WayPoint b;
+            //d = R arccos [sin (φa) •sin(φb) + cos(φa) • cos(φb) • cos(λa - λb)
+            for(int i=0; i<count; i++)
+            {
+                city=GetCityPerIndex(i);
+                b=city.Location;
+                dAB=a.Longitude- b.Longitude;
+                c=(Math.Sin(a.Latitude)*Math.Sin(b.Latitude)) + (Math.Cos(a.Latitude)*Math.Cos(b.Latitude)*Math.Cos(dAB));
+                d=R*c;
+                if (d<= distance)
+                {
+                    neighbours.Add(city);
+                }
+
+            }
+            return neighbours;
+        }
+
     }
 }
 ;
