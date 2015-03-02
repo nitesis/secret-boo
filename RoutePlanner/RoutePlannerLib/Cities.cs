@@ -10,12 +10,12 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
     public class Cities
     {
         List<City> cityList = new List<City>();
-
+        int count;
         public int ReadCities(string filename)
         {
             TextReader reader = new StreamReader(filename); 
             String line = reader.ReadLine();
-            int count = 0;
+            count = 0;
             while (line != null)
             {
                 String[] lineSplit = line.Split('\t');
@@ -28,5 +28,20 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             return count; 
             
         }
+
+        public City GetCityPerIndex(int index)
+        {
+            if (index < count || index > count)
+                return null;
+            else
+                return cityList.ElementAt(index);
+        }
+
+        public int GetCount()
+        {
+            return count;
+        }
+
     }
 }
+;
