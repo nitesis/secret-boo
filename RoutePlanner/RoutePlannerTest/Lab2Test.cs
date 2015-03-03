@@ -1,4 +1,4 @@
-﻿/*using System.Linq;
+﻿using System.Linq;
 using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -38,7 +38,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
         {
             // test complete way point
             var target = new WayPoint(Name, Latitude, Longitude);
-            string wayPointOut = string.Format("WayPoint: {0} {1:N2}/{2:N2}", 
+            string wayPointOut = string.Format("WayPoint: {0} {1:N2}/{2:N2}",
                                 Name, Latitude, Longitude);
 
             Assert.AreEqual(wayPointOut, target.ToString());
@@ -48,7 +48,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
             string wayPointOutNullName = string.Format("WayPoint: {0:N2}/{1:N2}",
                                 Latitude, Longitude);
             Assert.AreEqual(wayPointOutNullName, targetNullName.ToString());
-            
+
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
             Assert.AreEqual(readCitiesExpected, cities.ReadCities(CitiesTestFile));
 
             // total count should be doubled
-            Assert.AreEqual(2*readCitiesExpected, cities.Count);
+            Assert.AreEqual(2 * readCitiesExpected, cities.Count);
 
             //verify first and last city
             Assert.AreEqual("Mumbai", cities[0].Name);
@@ -121,13 +121,15 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
             Assert.AreEqual(4, neighbors.Count);
 
             //verifies if the correct cities were found
-            Assert.IsNotNull(neighbors.First(c=>c.Name == "Mumbai"));
+            Assert.IsNotNull(neighbors.First(c => c.Name == "Mumbai"));
             Assert.IsNotNull(neighbors.First(c => c.Name == "Karachi"));
             Assert.IsNotNull(neighbors.First(c => c.Name == "Dhaka"));
             Assert.IsNotNull(neighbors.First(c => c.Name == "Dilli"));
         }
+    }
+}
 
-        [TestMethod]
+   /*     [TestMethod]
         public void TestFindNeighboursSorted()
         {
             var cities = new Cities();

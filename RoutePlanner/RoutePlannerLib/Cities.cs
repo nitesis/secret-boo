@@ -9,8 +9,29 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
     public class Cities
     {
+       
         List<City> cityList = new List<City>();
         public int Count { get; set; }
+
+        public City this[int index]
+        {
+            get{
+                 if (index < 0 || index > Count-1)
+                 {
+                     return null;
+                 }
+                 return this.cityList.ElementAt(index);
+            }
+           /* set{
+
+                if (index >0 || index < Count)
+                 {
+                     this.cityList.CopyTo(value,index);
+                 }
+
+            }*/
+        }
+        
 
         public int ReadCities(string filename)
         {
@@ -30,14 +51,6 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             
         }
 
-        public City GetCityPerIndex(int index)
-        {
-            if (index < Count || index > Count)
-                return null;
-            else
-                return cityList.ElementAt(index);
-        }
-
         public List<City> FindNeighbours(WayPoint location, double distance)
         {
             List<City> neighbours=new List<City>();
@@ -46,7 +59,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             //d = R arccos [sin (φa) •sin(φb) + cos(φa) • cos(φb) • cos(λa - λb)
             for(int i=0; i<Count; i++)
             {
-                city=GetCityPerIndex(i);
+                city=cityList[i];
                 d = location.Distance(city.Location);
                 if (d<= distance)
                 {
