@@ -23,7 +23,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerConsole
             Console.WriteLine("{0}", wayPointWindisch);
             Console.WriteLine("{0} {1}", "Distance Bern - Tripolis: ", wayPointBern.Distance(wayPointTripolis));
             /* txt file has to be here ..\secret-boo\RoutePlanner\RoutePlannerConsole\bin\Debug\citiesTestDataLab2.txt */
-            Console.WriteLine("{0} {1}", "Anzahl eingelesene Städte: ", cities.ReadCities("citiesTestDataLab2.txt"));
+           Console.WriteLine("{0} {1}", "Anzahl eingelesene Städte: ", cities.ReadCities("citiesTestDataLab2.txt"));
             Console.ReadKey();
         }
 

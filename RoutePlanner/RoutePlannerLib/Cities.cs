@@ -42,20 +42,12 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         {
             List<City> neighbours=new List<City>();
             City city;
-            var R=6371;
-            double dAB;
-            double c;
             double d;
-            WayPoint a=location;
-            WayPoint b;
             //d = R arccos [sin (φa) •sin(φb) + cos(φa) • cos(φb) • cos(λa - λb)
             for(int i=0; i<Count; i++)
             {
                 city=GetCityPerIndex(i);
-                b=city.Location;
-                dAB=a.Longitude- b.Longitude;
-                c=(Math.Sin(a.Latitude)*Math.Sin(b.Latitude)) + (Math.Cos(a.Latitude)*Math.Cos(b.Latitude)*Math.Cos(dAB));
-                d=R*c;
+                d = location.Distance(city.Location);
                 if (d<= distance)
                 {
                     neighbours.Add(city);

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿/*using System.Linq;
 using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -150,3 +150,4 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
         }
     }
 }
+*/

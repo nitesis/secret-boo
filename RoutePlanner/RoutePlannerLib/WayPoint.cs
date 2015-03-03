@@ -44,9 +44,20 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public double Distance(WayPoint target)
         {
-            double distance;
-            distance = Radius * Math.Acos (Math.Sin (this.Latitude) * Math.Sin(target.Latitude) + Math.Cos(this.Latitude) * Math.Cos(target.Latitude) * Math.Cos(this.Longitude - target.Longitude));
-            return distance;
+
+            double dAB;
+            double c;
+            double d;
+            WayPoint a = this;
+            WayPoint b=target;
+            dAB = a.Longitude - b.Longitude;
+            c = (Math.Sin(a.Latitude) * Math.Sin(b.Latitude)) + (Math.Cos(a.Latitude) * Math.Cos(b.Latitude) * Math.Cos(dAB));
+            d = Radius * c;
+            return d;
+
+           // double distance;
+           // distance = Radius * Math.Acos (Math.Sin (this.Latitude) * Math.Sin(target.Latitude) + Math.Cos(this.Latitude) * Math.Cos(target.Latitude) * Math.Cos(this.Longitude - target.Longitude));
+           // return distance;
 
         }
  
