@@ -22,14 +22,6 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                  }
                  return this.cityList.ElementAt(index);
             }
-           /* set{
-
-                if (index >0 || index < Count)
-                 {
-                     this.cityList.CopyTo(value,index);
-                 }
-
-            }*/
         }
         
 
