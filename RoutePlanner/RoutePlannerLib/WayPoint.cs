@@ -36,31 +36,40 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                     Longitude = Longitude - (int)Longitude;
                     return ("WayPoint: " + Latitude + "/" + Longitude);
                 }
-           /* "WayPoint: {0} {1:N2}/{2:N2}" */
+           
                 return ("WayPoint: " + Name + " " + Latitude + "/" + Longitude);
                 
                 
             }
 
+        
+
         public double Distance(WayPoint target)
         {
 
-                double dAB;
+               double dAB;
                 double c;
                 double d;
-                WayPoint a = this;
-                WayPoint b=target;
-                dAB = a.Longitude - b.Longitude;
-                c = (Math.Sin(a.Latitude) * Math.Sin(b.Latitude)) + (Math.Cos(a.Latitude) * Math.Cos(b.Latitude) * Math.Cos(dAB));
-                d = Radius * Math.Acos(c);
-                return d;
+               double  thisLongRad = WayPoint.ToRadians(this.Longitude);
+               double thisLatRad = WayPoint.ToRadians(this.Latitude);
+               double targetLongRad = WayPoint.ToRadians(target.Longitude);
+               double targetLatRad = WayPoint.ToRadians(target.Latitude);
+               dAB = thisLongRad - targetLongRad;
+               c = (Math.Sin(thisLatRad) * Math.Sin(targetLatRad)) + (Math.Cos(thisLatRad) * Math.Cos(targetLatRad) * Math.Cos(dAB));
+               d = Radius * Math.Acos(c);
+               return d;
 
           /*  double distance;
             distance = Radius * Math.Acos (Math.Sin (this.Latitude) * Math.Sin(target.Latitude) + Math.Cos(this.Latitude) * Math.Cos(target.Latitude) * Math.Cos(this.Longitude - target.Longitude));
             return distance; */
 
+
         }
- 
+
+        public static double ToRadians(double val)
+        {
+            return (Math.PI / 180) * val;
+        }
 
     }
 }
