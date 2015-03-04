@@ -34,10 +34,10 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 {
                     Latitude = Latitude - (int)Latitude;
                     Longitude = Longitude - (int)Longitude;
-                    return ("Way point:" + Latitude + Longitude);
+                    return ("WayPoint: " + Latitude + "/" + Longitude);
                 }
-
-                return ("Way point:" + Name + " " + Latitude + "/" + Longitude);
+           /* "WayPoint: {0} {1:N2}/{2:N2}" */
+                return ("WayPoint: " + Name + " " + Latitude + "/" + Longitude);
                 
                 
             }
@@ -45,19 +45,19 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         public double Distance(WayPoint target)
         {
 
-            double dAB;
-            double c;
-            double d;
-            WayPoint a = this;
-            WayPoint b=target;
-            dAB = a.Longitude - b.Longitude;
-            c = (Math.Sin(a.Latitude) * Math.Sin(b.Latitude)) + (Math.Cos(a.Latitude) * Math.Cos(b.Latitude) * Math.Cos(dAB));
-            d = Radius * c;
-            return d;
+                double dAB;
+                double c;
+                double d;
+                WayPoint a = this;
+                WayPoint b=target;
+                dAB = a.Longitude - b.Longitude;
+                c = (Math.Sin(a.Latitude) * Math.Sin(b.Latitude)) + (Math.Cos(a.Latitude) * Math.Cos(b.Latitude) * Math.Cos(dAB));
+                d = Radius * Math.Acos(c);
+                return d;
 
-           // double distance;
-           // distance = Radius * Math.Acos (Math.Sin (this.Latitude) * Math.Sin(target.Latitude) + Math.Cos(this.Latitude) * Math.Cos(target.Latitude) * Math.Cos(this.Longitude - target.Longitude));
-           // return distance;
+          /*  double distance;
+            distance = Radius * Math.Acos (Math.Sin (this.Latitude) * Math.Sin(target.Latitude) + Math.Cos(this.Latitude) * Math.Cos(target.Latitude) * Math.Cos(this.Longitude - target.Longitude));
+            return distance; */
 
         }
  
