@@ -94,7 +94,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
 
           //  Assert.AreEqual(readCitiesExpected, cities.Count);
 
-          /*  // read cities once again; cities should be added to the list
+           // read cities once again; cities should be added to the list
             Assert.AreEqual(readCitiesExpected, cities.ReadCities(CitiesTestFile));
 
             // total count should be doubled
@@ -105,7 +105,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
             Assert.AreEqual("Jakarta", cities[9].Name);
 
             // check for invalid index
-            Assert.IsNull(cities[100]);*/
+            Assert.IsNull(cities[100]);
         }
 
         [TestMethod]
