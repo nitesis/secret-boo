@@ -105,7 +105,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
             Assert.AreEqual("Jakarta", cities[9].Name);
 
             // check for invalid index
-            Assert.IsNull(cities[100]);
+           Assert.IsNull(cities[100]);
         }
 
         [TestMethod]

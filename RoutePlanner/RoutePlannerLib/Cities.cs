@@ -23,13 +23,18 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                  return this.cityList.ElementAt(index);
             }
         }
+
+        public Cities()
+        {
+            Count = 0;
+        }
+
         
 
         public int ReadCities(string filename)
         {
             TextReader reader = new StreamReader(filename); 
             String line = reader.ReadLine();
-            Count = 0;
             while (line != null)
             {
                 String[] lineSplit = line.Split('\t');
