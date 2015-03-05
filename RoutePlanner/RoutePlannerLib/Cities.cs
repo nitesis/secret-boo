@@ -9,9 +9,15 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
     public class Cities
     {
-       
-        List<City> cityList = new List<City>();
-        public int Count { get; set; }
+
+        private List<City> cityList;
+        public int Count
+        {
+            get
+            {
+                return cityList.Count;
+            }
+        }
 
         public City this[int index]
         {
@@ -20,13 +26,17 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                  {
                      return null;
                  }
-                 return this.cityList.ElementAt(index);
+                 return this.cityList[index];
+            }
+            set
+            {
+                this.cityList[index] = value;
             }
         }
 
         public Cities()
         {
-            Count = 0;
+            cityList = new List<City>();
         }
 
         
@@ -35,16 +45,17 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         {
             TextReader reader = new StreamReader(filename); 
             String line = reader.ReadLine();
+            int count = 0;
             while (line != null)
             {
                 String[] lineSplit = line.Split('\t');
                 City newCity = new City(lineSplit[0], lineSplit[1], Convert.ToInt32(lineSplit[2]), Convert.ToDouble(lineSplit[3]), Convert.ToDouble(lineSplit[4]));
             
                 cityList.Add(newCity);
-                Count++;
+                count++;
                 line = reader.ReadLine();
             }
-            return Count; 
+            return count; 
             
         }
 
