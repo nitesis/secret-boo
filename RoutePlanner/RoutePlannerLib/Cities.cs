@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
@@ -49,9 +50,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             while (line != null)
             {
                 String[] lineSplit = line.Split('\t');
-                City newCity = new City(lineSplit[0], lineSplit[1], Convert.ToInt32(lineSplit[2]), Convert.ToDouble(lineSplit[3]), Convert.ToDouble(lineSplit[4]));
-            
-                cityList.Add(newCity);
+                cityList.Add(new City(lineSplit[0], lineSplit[1], int.Parse(lineSplit[2]), Double.Parse(lineSplit[3], CultureInfo.InvariantCulture), Double.Parse(lineSplit[4], CultureInfo.InvariantCulture)));
                 count++;
                 line = reader.ReadLine();
             }

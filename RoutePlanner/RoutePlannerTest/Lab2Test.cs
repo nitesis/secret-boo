@@ -92,7 +92,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
 
             Assert.AreEqual(readCitiesExpected, cities.ReadCities(CitiesTestFile));
 
-          //  Assert.AreEqual(readCitiesExpected, cities.Count);
+            Assert.AreEqual(readCitiesExpected, cities.Count);
 
            // read cities once again; cities should be added to the list
             Assert.AreEqual(readCitiesExpected, cities.ReadCities(CitiesTestFile));
