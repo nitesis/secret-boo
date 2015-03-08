@@ -77,6 +77,16 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             return neighbours;
         }
 
+        public City FindCity(string cityName)
+        {
+            Predicate<City> predicateDelegate = delegate(City c)
+            {
+                return c.Name.ToUpper().Equals(cityName.ToUpper());
+            };
+
+            return cityList.Find(predicateDelegate);
+        }
+
     }
 }
 ;
