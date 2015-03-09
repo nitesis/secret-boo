@@ -64,6 +64,8 @@
     <Content Include="data\citiesTestDataLab2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data\citiesTestDataLab3.txt" />
+    <Content Include="data\linksTestDataLab3.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
