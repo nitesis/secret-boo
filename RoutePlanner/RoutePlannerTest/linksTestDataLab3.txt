@@ -1,7 +1,0 @@
-Zürich	Winterthur
-Genève	Lyon
-Basel	Liestal
-Liestal	Aarau
-Bern	Thun
-Lausanne	Genève
-Winterthur	Frauenfeld
