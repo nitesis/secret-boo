@@ -15,7 +15,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
     {
         List<Link> routes = new List<Link>();
         Cities cities;
-        delegate void RouteRequestHandler(object sender, RouteRequestEventArgs e);
+        public delegate void RouteRequestHandler(object sender, RouteRequestEventArgs e);
         public event RouteRequestHandler RouteRequest; 
         public int Count
         {

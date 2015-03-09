@@ -8,14 +8,14 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
     public class RouteRequestEventArgs: System.EventArgs 
     {
-        String formCity { get; set; }
+        String fromCity { get; set; }
         String toCity { get; set; }
         TransportModes mode { set; get; }
 
     
         public RouteRequestEventArgs(String from, String to , TransportModes mode)
         {
-            this.formCity = from;
+            this.fromCity = from;
             this.toCity = to;
             this.mode = mode;
         }
