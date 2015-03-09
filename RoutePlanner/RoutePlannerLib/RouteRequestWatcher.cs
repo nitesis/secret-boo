@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
-    class RouteRequestWatcher
+   public  class RouteRequestWatcher
     {
-        Dictionary<string, int> log = new Dictionary<string, int>();
+        public Dictionary<string, int> Log = new Dictionary<string, int>();
+        public void LogRouteRequests(object sender, RouteRequestEventArgs e)
+        {
+
+        }
+       public int GetCityRequests(string cityName)
+        {
+            return 0;
+        }
+
+       
     }
 }
