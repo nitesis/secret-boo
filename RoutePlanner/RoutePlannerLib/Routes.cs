@@ -16,7 +16,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         List<Link> routes = new List<Link>();
         Cities cities;
         public delegate void RouteRequestHandler(object sender, RouteRequestEventArgs e);
-        public event RouteRequestHandler RouteRequest; 
+        public event RouteRequestHandler RouteRequestEvent; 
         public int Count
         {
             get { return routes.Count; }
@@ -66,9 +66,9 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                                         TransportModes mode)
         {
 
-            if (RouteRequest != null)
+            if (RouteRequestEvent != null)
             {
-                RouteRequest(this,new RouteRequestEventArgs(fromCity, toCity, mode));
+                RouteRequestEvent(this,new RouteRequestEventArgs(fromCity, toCity, mode));
             }
             return null;
         }
