@@ -54,6 +54,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 count++;
                 line = reader.ReadLine();
             }
+            reader.Dispose();
             return count; 
             
         }

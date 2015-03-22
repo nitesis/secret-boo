@@ -37,7 +37,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                     
                 }
 
-                return string.Format("WayPoint:{0} {1:F2}/{2:F2}", Name, Latitude, Longitude); 
+                return string.Format("WayPoint: {0} {1:F2}/{2:F2}", Name, Latitude, Longitude); 
                 
                 
             }
