@@ -31,8 +31,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 
                 if((this.Name == null) || (this.Name == ""))
                 {
-                    Latitude = Latitude - (int)Latitude;
-                    Longitude = Longitude - (int)Longitude;
+                   
                     return string.Format("WayPoint: {0:F2}/{1:F2}", Latitude, Longitude);
                     
                 }
