@@ -27,17 +27,17 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public override string ToString()
             {
-                Latitude = Math.Round(this.Latitude, 2);
-                Longitude = Math.Round(this.Longitude, 2);
+               
                 
                 if((this.Name == null) || (this.Name == ""))
                 {
                     Latitude = Latitude - (int)Latitude;
                     Longitude = Longitude - (int)Longitude;
-                    return ("WayPoint: " + Latitude + "/" + Longitude);
+                    return string.Format("WayPoint: {0:F2}/{1:F2}", Latitude, Longitude);
+                    
                 }
-           
-                return ("WayPoint: " + Name + " " + Latitude + "/" + Longitude);
+
+                return string.Format("WayPoint:{0} {1:F2}/{2:F2}", Name, Latitude, Longitude); 
                 
                 
             }
