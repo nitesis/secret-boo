@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
-    public class Cities
+    public class Cities 
     {
 
         private List<City> cityList;
@@ -118,6 +118,9 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         }
         #endregion
 
+  
     }
+
+
 }
 ;

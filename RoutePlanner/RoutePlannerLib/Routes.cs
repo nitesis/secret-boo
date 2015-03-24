@@ -70,7 +70,9 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             {
                 RouteRequestEvent(this,new RouteRequestEventArgs(fromCity, toCity, mode));
             }
-            return null;
+            City cityFrom = cities.FindCity(fromCity);
+            City cityTo = cities.FindCity(toCity);
+            return FindShortestRouteBetween(cityFrom, cityTo, mode);
         }
 
         #region Lab04: Dijkstra implementation
@@ -93,14 +95,23 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
             // create a list with all cities on the route
             var citiesOnRoute = GetCitiesOnRoute(source, target, previous);
-
-            // prepare final list if links
+            // prepare final list of links
             return FindPath(citiesOnRoute, mode);
         }
 
-        public List<Link> FindPath(List<City> citiesOnRoute, TransportModes modes)
+        public List<Link> FindPath(List<City> cityList, TransportModes mode)
         {
-            throw new NotImplementedException();
+            if (cityList == null||cityList.Count==1)
+                return null;
+            else
+            {
+                List<Link> links = new List<Link>();
+                for (int i = 1; i <= cityList.Count; i++)
+                {
+                    links.Add(FindLink(cityList[i - 1], cityList[i], mode));
+                }
+                return links;
+            }         
         }
 
         private static List<City> FillListOfNodes(List<City> cities, out Dictionary<City, double> dist, out Dictionary<City, City> previous)
@@ -169,7 +180,12 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public Link FindLink(City u,City n,TransportModes mode)
             {
- 	            throw new NotImplementedException();
+               
+                foreach(Link l in routes){
+                    if ((l.FromCity.Equals(u))&&(l.ToCity.Equals(n))&& (l.TransportMode==mode))
+                        return l;
+                }
+                return null;
             }
 
 

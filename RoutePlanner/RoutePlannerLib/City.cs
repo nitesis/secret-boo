@@ -24,5 +24,21 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             
         }
 
+      public override bool Equals(Object obj)
+        {
+            if ((obj == null))
+                return false;
+            else
+            {
+                if(this.Name.ToUpper().Equals(((City)obj).Name.ToUpper()))
+                {
+                    if (this.Country.ToUpper().Equals(((City)obj).Country.ToUpper()))
+                        return true;
+                }
+            }
+          return false;
+           
+        }
+
     }
 }
