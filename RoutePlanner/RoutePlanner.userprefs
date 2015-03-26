@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RoutePlannerTest/Lab2Test.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RoutePlannerLib/TextReaderExtension.cs">
     <Files>
       <File FileName="RoutePlannerTest/Lab2Test.cs" Line="19" Column="19" />
       <File FileName="RoutePlannerConsole/RoutePlannerConsoleApp.cs" Line="9" Column="9" />
+      <File FileName="RoutePlannerLib/TextReaderExtension.cs" Line="32" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
