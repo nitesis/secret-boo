@@ -31,6 +31,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             else
             {
                 if(this.Name.ToUpper().Equals(((City)obj).Name.ToUpper()))
+                
                 {
                     if (this.Country.ToUpper().Equals(((City)obj).Country.ToUpper()))
                         return true;

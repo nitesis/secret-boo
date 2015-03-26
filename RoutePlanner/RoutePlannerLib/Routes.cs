@@ -101,17 +101,18 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public List<Link> FindPath(List<City> cityList, TransportModes mode)
         {
-            if (cityList == null||cityList.Count==1)
+            if (cityList == null || cityList.Count==1)
                 return null;
             else
             {
                 List<Link> links = new List<Link>();
-                for (int i = 1; i <= cityList.Count; i++)
+                for (int i = 1; i < cityList.Count; i++)
                 {
                     links.Add(FindLink(cityList[i - 1], cityList[i], mode));
                 }
                 return links;
-            }         
+            } 
+             
         }
 
         private static List<City> FillListOfNodes(List<City> cities, out Dictionary<City, double> dist, out Dictionary<City, City> previous)
@@ -183,6 +184,9 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                
                 foreach(Link l in routes){
                     if ((l.FromCity.Equals(u))&&(l.ToCity.Equals(n))&& (l.TransportMode==mode))
+                        return l;
+
+                    if ((l.FromCity.Equals(n))&&(l.ToCity.Equals(u))&& (l.TransportMode==mode))
                         return l;
                 }
                 return null;
