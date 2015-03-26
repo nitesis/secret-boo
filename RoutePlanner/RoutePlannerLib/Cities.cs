@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util;
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
-    public class Cities 
+    public class Cities
     {
 
         private List<City> cityList;
@@ -22,12 +23,13 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public City this[int index]
         {
-            get{
-                 if (index < 0 || index > Count-1)
-                 {
-                     return null;
-                 }
-                 return this.cityList[index];
+            get
+            {
+                if (index < 0 || index > Count - 1)
+                {
+                    return null;
+                }
+                return this.cityList[index];
             }
             set
             {
@@ -40,36 +42,44 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             cityList = new List<City>();
         }
 
-        
+
 
         public int ReadCities(string filename)
         {
-            TextReader reader = new StreamReader(filename); 
-            String line = reader.ReadLine();
             int count = 0;
-            while (line != null)
+            using (TextReader reader = new StreamReader(filename))
             {
-                String[] lineSplit = line.Split('\t');
-                cityList.Add(new City(lineSplit[0], lineSplit[1], int.Parse(lineSplit[2]), Double.Parse(lineSplit[3], CultureInfo.InvariantCulture), Double.Parse(lineSplit[4], CultureInfo.InvariantCulture)));
-                count++;
-                line = reader.ReadLine();
+
+
+                IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
+
+                
+                foreach (string[] cs in citiesAsStrings)
+                {
+                    cityList.Add(new City(cs[0].Trim(), cs[1].Trim(),
+                        int.Parse(cs[2]),
+                    double.Parse(cs[3]),
+                    double.Parse(cs[4])));
+
+                    count++;
+                }
             }
-            reader.Dispose();
-            return count; 
-            
+
+            return count;
+
         }
 
         public List<City> FindNeighbours(WayPoint location, double distance)
         {
-            List<City> neighbours=new List<City>();
+            List<City> neighbours = new List<City>();
             City city;
             double d;
             //d = R arccos [sin (φa) •sin(φb) + cos(φa) • cos(φb) • cos(λa - λb)
-            for(int i=0; i<Count; i++)
+            for (int i = 0; i < Count; i++)
             {
-                city=cityList[i];
+                city = cityList[i];
                 d = location.Distance(city.Location);
-                if (d<= distance)
+                if (d <= distance)
                 {
                     neighbours.Add(city);
                 }
@@ -118,7 +128,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         }
         #endregion
 
-  
+
     }
 
 
