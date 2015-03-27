@@ -7,6 +7,7 @@ using System.Data;
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
+   [Serializable]
    public  class  WayPoint
     {
        
