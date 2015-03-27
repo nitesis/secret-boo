@@ -18,7 +18,23 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         }
         static public IRoutes Create(Cities cities, string algorithmClassName)
         {
-            return null;
+            if (Type.GetType(algorithmClassName) != null)
+            {
+                try
+                {
+                    Assembly a = Assembly.LoadFrom("RoutePlannerLib.dll");
+                    var tOfAssembly = a.GetType(algorithmClassName);
+                    if (tOfAssembly != null)
+                    {
+                        Type type = Type.GetType(algorithmClassName);
+                        ConstructorInfo ctor = type.GetConstructor(new[] { typeof(Cities) });
+                        object instance = ctor.Invoke(new object[] { cities });
+                        return (IRoutes)instance;
+                    }
+                }
+                catch (Exception) { }
+            }
+            return null;         
         }
     }
 }
