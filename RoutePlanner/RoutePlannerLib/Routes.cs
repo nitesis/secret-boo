@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Linq;
 using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib;
-using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util;
-
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
@@ -18,7 +16,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         List<Link> routes = new List<Link>();
         Cities cities;
         public delegate void RouteRequestHandler(object sender, RouteRequestEventArgs e);
-        public event RouteRequestHandler RouteRequestEvent;
+        public event RouteRequestHandler RouteRequestEvent; 
         public int Count
         {
             get { return routes.Count; }
@@ -41,31 +39,6 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         /// <returns>number of read route</returns>
         public int ReadRoutes(string filename)
         {
-/*
-            using (TextReader reader = new StreamReader(filename))
-            {
-
-                IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
-
-                string fromCity;
-                string toCity;
-                double distance;
-                City city1;
-                City city2;
-                foreach (string[] cs in citiesAsStrings)
-                {
-                    fromCity = cs[0];
-                    toCity = cs[1];
-                    city1 = cities.FindCity(fromCity);
-                    city2 = cities.FindCity(toCity);
-                    distance = city1.Location.Distance(city2.Location);
-                    if ((city1 != null) && (city2 != null))
-                    {
-                        routes.Add(new Link(city1, city2, distance, TransportModes.Car));
-                    }
-
-                }
-            }*/
             using (TextReader reader = new StreamReader(filename))
             {
                 string line;
@@ -85,7 +58,6 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 }
             }
 
-
             return Count;
 
         }
@@ -96,7 +68,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
             if (RouteRequestEvent != null)
             {
-                RouteRequestEvent(this, new RouteRequestEventArgs(fromCity, toCity, mode));
+                RouteRequestEvent(this,new RouteRequestEventArgs(fromCity, toCity, mode));
             }
             City cityFrom = cities.FindCity(fromCity);
             City cityTo = cities.FindCity(toCity);
@@ -129,7 +101,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public List<Link> FindPath(List<City> cityList, TransportModes mode)
         {
-            if (cityList == null || cityList.Count == 1)
+            if (cityList == null || cityList.Count==1)
                 return null;
             else
             {
@@ -139,8 +111,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                     links.Add(FindLink(cityList[i - 1], cityList[i], mode));
                 }
                 return links;
-            }
-
+            } 
+             
         }
 
         private static List<City> FillListOfNodes(List<City> cities, out Dictionary<City, double> dist, out Dictionary<City, City> previous)
@@ -207,19 +179,18 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             return previous;
         }
 
-        public Link FindLink(City u, City n, TransportModes mode)
-        {
-
-            foreach (Link l in routes)
+        public Link FindLink(City u,City n,TransportModes mode)
             {
-                if ((l.FromCity.Equals(u)) && (l.ToCity.Equals(n)) && (l.TransportMode == mode))
-                    return l;
+               
+                foreach(Link l in routes){
+                    if ((l.FromCity.Equals(u))&&(l.ToCity.Equals(n))&& (l.TransportMode==mode))
+                        return l;
 
-                if ((l.FromCity.Equals(n)) && (l.ToCity.Equals(u)) && (l.TransportMode == mode))
-                    return l;
+                    if ((l.FromCity.Equals(n))&&(l.ToCity.Equals(u))&& (l.TransportMode==mode))
+                        return l;
+                }
+                return null;
             }
-            return null;
-        }
 
 
         /// <summary>

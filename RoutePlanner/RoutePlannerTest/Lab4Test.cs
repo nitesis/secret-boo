@@ -33,8 +33,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
 
         [TestMethod]
         public void TestTaskReadRoutes()
-        
-       {
+        {
             var cities = new Cities();
             cities.ReadCities(CitiesTestFile);
             var expectedLinks = new List<Link>();
