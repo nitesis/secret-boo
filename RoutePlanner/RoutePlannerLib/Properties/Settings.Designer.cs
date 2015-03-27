@@ -16,7 +16,7 @@ namespace RoutePlannerLib.Properties {
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        public string RouteAlgorithm;
+        
         
         public static Settings Default {
             get {
@@ -27,15 +27,19 @@ namespace RoutePlannerLib.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Routes")]
-        public string RouteAlgorithm {
-            get {
+
+        public string RouteAlgorithm
+        {
+            get
+            {
                 return ((string)(this["RouteAlgorithm"]));
             }
-            set {
+            set
+            {
                 this["RouteAlgorithm"] = value;
             }
         }
-
-        public string RouteAlgorithm { get; set; }
+    
+    
     }
 }
