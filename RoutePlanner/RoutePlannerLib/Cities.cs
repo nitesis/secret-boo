@@ -71,21 +71,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public List<City> FindNeighbours(WayPoint location, double distance)
         {
-            List<City> neighbours = new List<City>();
-            City city;
-            double d;
-            //d = R arccos [sin (φa) •sin(φb) + cos(φa) • cos(φb) • cos(λa - λb)
-            for (int i = 0; i < Count; i++)
-            {
-                city = cityList[i];
-                d = location.Distance(city.Location);
-                if (d <= distance)
-                {
-                    neighbours.Add(city);
-                }
-
-            }
-            return neighbours;
+            var neighbours = cityList.Where(c => location.Distance(c.Location) <= distance);
+            return neighbours.OrderBy(o => location.Distance(o.Location)).ToList();
         }
 
         public City FindCity(string cityName)
