@@ -90,12 +90,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public City FindCity(string cityName)
         {
-            Predicate<City> predicateDelegate = delegate(City c)
-            {
-                return c.Name.ToUpper().Equals(cityName.ToUpper());
-            };
-
-            return cityList.Find(predicateDelegate);
+            Predicate<City> predicateDelegate;
+            return cityList.Find (predicateDelegate = c => c.Name.ToUpper().Equals(cityName.ToUpper()));
         }
 
         #region Lab04: FindShortestPath helper function
