@@ -252,9 +252,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                   { listOfCities.Add(r.FromCity); listOfCities.Add(r.ToCity); }
             });
 
-            var list = listOfCities.Distinct();
-
-            return list.ToArray();
+            return listOfCities.Distinct().ToArray();
         }
         #endregion
 
