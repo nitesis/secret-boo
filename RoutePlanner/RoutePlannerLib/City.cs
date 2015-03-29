@@ -16,6 +16,12 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         public WayPoint Location { get; set; }
         
 
+        public City()
+        {
+            this.Name = "";
+            this.Country = "";
+        }
+
         public City(string _name, string _country, int _population, double _latitude, double _longitude)
         {
             Name = _name;

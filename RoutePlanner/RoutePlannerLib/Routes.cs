@@ -23,6 +23,11 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             get { return routes.Count; }
         }
 
+        public Routes()
+        {
+
+        }
+
         /// <summary>
         /// Initializes the Routes with the cities.
         /// </summary>
