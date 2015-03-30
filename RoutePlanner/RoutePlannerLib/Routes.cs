@@ -18,7 +18,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         List<Link> routes = new List<Link>();
         Cities cities;
         public delegate void RouteRequestHandler(object sender, RouteRequestEventArgs e);
-        public event RouteRequestHandler RouteRequestEvent; 
+        public event RouteRequestHandler RouteRequestEvent;
         public int Count
         {
             get { return routes.Count; }
@@ -83,7 +83,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
             if (RouteRequestEvent != null)
             {
-                RouteRequestEvent(this,new RouteRequestEventArgs(fromCity, toCity, mode));
+                RouteRequestEvent(this, new RouteRequestEventArgs(fromCity, toCity, mode));
             }
             City cityFrom = cities.FindCity(fromCity);
             City cityTo = cities.FindCity(toCity);
@@ -116,7 +116,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public List<Link> FindPath(List<City> cityList, TransportModes mode)
         {
-            if (cityList == null || cityList.Count==1)
+            if (cityList == null || cityList.Count == 1)
                 return null;
             else
             {
@@ -126,8 +126,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                     links.Add(FindLink(cityList[i - 1], cityList[i], mode));
                 }
                 return links;
-            } 
-             
+            }
+
         }
 
         private static List<City> FillListOfNodes(List<City> cities, out Dictionary<City, double> dist, out Dictionary<City, City> previous)
@@ -194,18 +194,19 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             return previous;
         }
 
-        public Link FindLink(City u,City n,TransportModes mode)
-            {
-               
-                foreach(Link l in routes){
-                    if ((l.FromCity.Equals(u))&&(l.ToCity.Equals(n))&& (l.TransportMode==mode))
-                        return l;
+        public Link FindLink(City u, City n, TransportModes mode)
+        {
 
-                    if ((l.FromCity.Equals(n))&&(l.ToCity.Equals(u))&& (l.TransportMode==mode))
-                        return l;
-                }
-                return null;
+            foreach (Link l in routes)
+            {
+                if ((l.FromCity.Equals(u)) && (l.ToCity.Equals(n)) && (l.TransportMode == mode))
+                    return l;
+
+                if ((l.FromCity.Equals(n)) && (l.ToCity.Equals(u)) && (l.TransportMode == mode))
+                    return l;
             }
+            return null;
+        }
 
 
         /// <summary>
@@ -217,16 +218,16 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         private List<City> FindNeighbours(City city, TransportModes mode)
         {
             var neighbors = new List<City>();
-            foreach (var r in routes)
-                if (mode.Equals(r.TransportMode))
-                {
-                    if (city.Equals(r.FromCity))
-                        neighbors.Add(r.ToCity);
-                    else if (city.Equals(r.ToCity))
-                        neighbors.Add(r.FromCity);
-                }
 
+            foreach (var r in routes.Where(r => r.TransportMode.Equals(mode)))
+            {
+                if (city.Equals(r.FromCity))
+                    neighbors.Add(r.ToCity);
+                else if (city.Equals(r.ToCity))
+                    neighbors.Add(r.FromCity);
+            }
             return neighbors;
+
         }
 
         private List<City> GetCitiesOnRoute(City source, City target, Dictionary<City, City> previous)
@@ -246,10 +247,11 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public City[] FindCities(TransportModes transportMode)
         {
-            List<City> listOfCities = new  List<City>();
-            routes.ForEach(r => { 
-                if (r.TransportMode == transportMode) 
-                  { listOfCities.Add(r.FromCity); listOfCities.Add(r.ToCity); }
+            List<City> listOfCities = new List<City>();
+            routes.ForEach(r =>
+            {
+                if (r.TransportMode == transportMode)
+                { listOfCities.Add(r.FromCity); listOfCities.Add(r.ToCity); }
             });
 
             return listOfCities.Distinct().ToArray();
