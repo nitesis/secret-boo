@@ -49,12 +49,25 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             int count = 0;
             using (TextReader reader = new StreamReader(filename))
             {
-
-
                 IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
 
+                List<City> result = citiesAsStrings.Select(cs => new City(cs[0].Trim(), cs[1].Trim(),
+                        int.Parse(cs[2]),
+                    double.Parse(cs[3], CultureInfo.InvariantCulture),
+                    double.Parse(cs[4], CultureInfo.InvariantCulture))).ToList();
+
+                cityList = cityList.Concat(result).ToList();
+                count = result.Count();
+
+              /*  List<City> citiesTemp =
+                   citiesAsStrings.Select(
+                       cs => new City(cs[0].Trim(), cs[1].Trim(), int.Parse(cs[2], CultureInfo.InvariantCulture),
+                           double.Parse(cs[3], CultureInfo.InvariantCulture),
+                           double.Parse(cs[4], CultureInfo.InvariantCulture))).ToList();
+                cities = cities.Concat(citiesTemp).ToList();
+                counter = citiesTemp.Count; */
                 
-                foreach (string[] cs in citiesAsStrings)
+                /*foreach (string[] cs in citiesAsStrings)
                 {
                     cityList.Add(new City(cs[0].Trim(), cs[1].Trim(),
                         int.Parse(cs[2]),
@@ -62,7 +75,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                     double.Parse(cs[4], CultureInfo.InvariantCulture)));
 
                     count++;
-                }
+                }*/
             }
           
             return count;
