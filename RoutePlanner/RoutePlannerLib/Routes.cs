@@ -1,8 +1,9 @@
-
+using System.Text;
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Linq;
 using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util;
 
@@ -242,7 +243,21 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             citiesOnRoute.Reverse();
             return citiesOnRoute;
         }
+
+        public City[] FindCities(TransportModes transportMode)
+        {
+            List<City> listOfCities = new  List<City>();
+            routes.ForEach(r => { 
+                if (r.TransportMode == transportMode) 
+                  { listOfCities.Add(r.FromCity); listOfCities.Add(r.ToCity); }
+            });
+
+            return listOfCities.Distinct().ToArray();
+        }
         #endregion
 
     }
+
+
 }
+
