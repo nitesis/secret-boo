@@ -48,7 +48,6 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         {
             using (TextReader reader = new StreamReader(filename))
             {
-
                 IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
 
                 string fromCity;
@@ -56,7 +55,21 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 double distance;
                 City city1;
                 City city2;
-                foreach (string[] cs in citiesAsStrings)
+
+                /* Versuch einer Lamda LINQ Kombi...leider falsch
+                var result =
+                from cs in citiesAsStrings 
+                let fromCity = cs[0]
+                let toCity = cs[1]
+                let city1 = cities.FindCity(fromCity)
+                let city2 = cities.FindCity(toCity)
+                select new
+                {
+                    if ((city1 != null) && (city2 != null))
+                    { distance = city1.Location.Distance(city2.Location);
+                      routes.Add(new Link(city1, city2, distance, TransportModes.Rail)); }
+                }); */
+                 foreach (string[] cs in citiesAsStrings)
                 {
                     fromCity = cs[0];
                     toCity = cs[1];
@@ -68,13 +81,9 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                         distance = city1.Location.Distance(city2.Location);
                         routes.Add(new Link(city1, city2, distance, TransportModes.Rail));
                     }
-
-                }
-            }
-
-
+                } 
+            } 
             return Count;
-
         }
 
         public List<Link> FindShortestRouteBetween(string fromCity, string toCity,
