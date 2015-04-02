@@ -56,19 +56,12 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 City city1;
                 City city2;
 
-                /* Versuch einer Lamda LINQ Kombi...leider falsch
-                var result =
-                from cs in citiesAsStrings 
-                let fromCity = cs[0]
-                let toCity = cs[1]
-                let city1 = cities.FindCity(fromCity)
-                let city2 = cities.FindCity(toCity)
-                select new
-                {
-                    if ((city1 != null) && (city2 != null))
-                    { distance = city1.Location.Distance(city2.Location);
-                      routes.Add(new Link(city1, city2, distance, TransportModes.Rail)); }
-                }); */
+              /*  city1.Select(cs =>
+                    {
+                        var fromCity = cs[0];
+                        
+                        return new { fromCity, toCity, distance}).Where(cs => cs.fromCity!=null && cs.toCity!=null).Select(cs => new Link(cs.fromCity, cs,toCity))
+              */
                  foreach (string[] cs in citiesAsStrings)
                 {
                     fromCity = cs[0];
