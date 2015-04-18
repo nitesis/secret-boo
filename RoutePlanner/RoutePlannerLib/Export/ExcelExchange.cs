@@ -53,14 +53,23 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Export
 
             
             // Fill the cells in the C1 to C4 range of the worksheet with the parameters.
-            Object[] args = new Object[1];
+           /* Object[] args = new Object[1];
             args[0] = from.Name;
             args[1] = to.Name;
             args[2] = from.Location.Distance(to.Location).ToString();
             args[3] = new Link(from, to, from.Location.Distance(to.Location)).TransportMode.ToString();
             
-           /* aRange.GetType().InvokeMember("Value", BindingFlags.SetProperty, null, aRange, args);*/
-    
+            aRange.GetType().InvokeMember("Value", BindingFlags.SetProperty, null, aRange, args);*/
+            int j = 2;
+            foreach(Link link in links)
+            {
+                ws.Cells[j, 1] = link.FromCity.Name;
+                ws.Cells[j, 2] = link.ToCity.Name;
+                ws.Cells[j, 3] = link.Distance;
+                ws.Cells[j, 4] = link.TransportMode;
+                j++;
+
+            }
             
             xlApp.DisplayAlerts = false;
             wb.SaveAs(fileName);

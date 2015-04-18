@@ -39,8 +39,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util
                                 s=s.Replace(",", ".");
                                 stream.Write(s);
                             }
-                        
-                           else
+
+                        else
                            {
                             stream.Write(p.Name + " is a nested object...\r\n");
                             this.Next(p.GetValue(obj));
