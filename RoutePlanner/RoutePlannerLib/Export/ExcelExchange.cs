@@ -66,7 +66,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Export
                 ws.Cells[j, 1] = link.FromCity.Name;
                 ws.Cells[j, 2] = link.ToCity.Name;
                 ws.Cells[j, 3] = link.Distance;
-                ws.Cells[j, 4] = link.TransportMode;
+                ws.Cells[j, 4] = link.TransportMode.ToString();
                 j++;
 
             }
