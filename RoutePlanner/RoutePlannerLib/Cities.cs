@@ -12,7 +12,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
     public class Cities
     {
 
-        private List<City> cityList;
+        public List<City> cityList;
         public int Count
         {
             get
@@ -87,6 +87,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             var neighbours = cityList.Where(c => location.Distance(c.Location) <= distance);
             return neighbours.OrderBy(o => location.Distance(o.Location)).ToList();
         }
+
 
         public City FindCity(string cityName)
         {

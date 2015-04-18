@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Cities.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="Dynamic\World.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Export\ExcelExchange.cs" />
     <Compile Include="IRoutes.cs" />
     <Compile Include="Link.cs" />
@@ -93,6 +96,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

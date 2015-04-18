@@ -2,7 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib;
 using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Export;
-//using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Dynamic;
+using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Dynamic;
+using System.Runtime.InteropServices;
 using System.IO;
 
 
@@ -35,7 +36,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
             Assert.IsTrue(File.Exists(excelFileName), excelFileName);
 
         }
-/*
+
         [TestMethod]
         public void TestDynamicWorld()
         {
@@ -51,7 +52,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
              string notFound = world.Entenhausen();
              Assert.AreEqual("The city \"Entenhausen\" does not exist!", notFound);
         }
-*/
+
     }
  
 }
