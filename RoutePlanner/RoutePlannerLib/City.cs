@@ -37,10 +37,10 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 return false;
             else
             {
-                if(this.Name.ToUpper().Equals(((City)obj).Name.ToUpper()))
+                if(this.Name.Equals(((City)obj).Name, StringComparison.InvariantCultureIgnoreCase))
                 
                 {
-                    if (this.Country.ToUpper().Equals(((City)obj).Country.ToUpper()))
+                    if (this.Country.Equals(((City)obj).Country, StringComparison.InvariantCultureIgnoreCase))
                         return true;
                 }
             }
