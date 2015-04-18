@@ -249,14 +249,16 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public City[] FindCities(TransportModes transportMode)
         {
-            List<City> listOfCities = new List<City>();
-            routes.ForEach(r =>
-            {
-                if (r.TransportMode == transportMode)
-                { listOfCities.Add(r.FromCity); listOfCities.Add(r.ToCity); }
-            });
-
+         
+            var listOfCities = routes.Where(r => r.TransportMode == transportMode)
+                .Select(c => c.FromCity)
+                .Concat(routes.Where(r => r.TransportMode == transportMode)
+                .Select(c => c.ToCity))
+                .Distinct();
+                
+          
             return listOfCities.Distinct().ToArray();
+           
         }
         #endregion
 
