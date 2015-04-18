@@ -82,7 +82,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public static WayPoint operator -(WayPoint lhs, WayPoint rhs)
         {
-            return new WayPoint(lhs.Name, Math.Abs(lhs.Latitude - rhs.Latitude), Math.Abs(lhs.Longitude - rhs.Longitude));
+            return new WayPoint(lhs.Name, lhs.Latitude - rhs.Latitude, lhs.Longitude - rhs.Longitude);
         }
 
     }
