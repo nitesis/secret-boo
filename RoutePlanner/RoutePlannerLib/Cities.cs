@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Diagnostics;
 using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util;
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 {
     public class Cities
     {
+        
 
         public List<City> cityList;
         public int Count
@@ -43,7 +45,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         }
 
 
-
+        
         public int ReadCities(string filename)
         {
             int count = 0;
@@ -77,10 +79,11 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                     count++;
                 }*/
             }
-          
+            
             return count;
-
+            
         }
+        
 
         public List<City> FindNeighbours(WayPoint location, double distance)
         {
