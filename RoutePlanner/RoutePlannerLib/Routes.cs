@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util;
+using System.Diagnostics;
 
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
@@ -17,6 +18,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
     {
         List<Link> routes = new List<Link>();
         Cities cities;
+        private static TraceSource RoutesFileLog = new TraceSource("Routes");
         public delegate void RouteRequestHandler(object sender, RouteRequestEventArgs e);
         public event RouteRequestHandler RouteRequestEvent;
         public int Count
@@ -46,36 +48,46 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         /// <returns>number of read route</returns>
         public int ReadRoutes(string filename)
         {
-            using (TextReader reader = new StreamReader(filename))
+            RoutesFileLog.TraceEvent(TraceEventType.Information, 3, "ReadRoutes started");
+            try
             {
-                IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
-
-                string fromCity;
-                string toCity;
-                double distance;
-                City city1;
-                City city2;
-
-              /*  city1.Select(cs =>
-                    {
-                        var fromCity = cs[0];
-                        
-                        return new { fromCity, toCity, distance}).Where(cs => cs.fromCity!=null && cs.toCity!=null).Select(cs => new Link(cs.fromCity, cs,toCity))
-              */
-                 foreach (string[] cs in citiesAsStrings)
+                using (TextReader reader = new StreamReader(filename))
                 {
-                    fromCity = cs[0];
-                    toCity = cs[1];
-                    city1 = cities.FindCity(fromCity);
-                    city2 = cities.FindCity(toCity);
+                    IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
 
-                    if ((city1 != null) && (city2 != null))
+                    string fromCity;
+                    string toCity;
+                    double distance;
+                    City city1;
+                    City city2;
+
+                    /*  city1.Select(cs =>
+                          {
+                              var fromCity = cs[0];
+                        
+                              return new { fromCity, toCity, distance}).Where(cs => cs.fromCity!=null && cs.toCity!=null).Select(cs => new Link(cs.fromCity, cs,toCity))
+                    */
+                    foreach (string[] cs in citiesAsStrings)
                     {
-                        distance = city1.Location.Distance(city2.Location);
-                        routes.Add(new Link(city1, city2, distance, TransportModes.Rail));
+                        fromCity = cs[0];
+                        toCity = cs[1];
+                        city1 = cities.FindCity(fromCity);
+                        city2 = cities.FindCity(toCity);
+
+                        if ((city1 != null) && (city2 != null))
+                        {
+                            distance = city1.Location.Distance(city2.Location);
+                            routes.Add(new Link(city1, city2, distance, TransportModes.Rail));
+                        }
                     }
-                } 
-            } 
+                }
+            }
+            catch (FileNotFoundException e)
+            {
+                RoutesFileLog.TraceEvent(TraceEventType.Critical, 9, e.ToString());
+            }
+
+            RoutesFileLog.TraceEvent(TraceEventType.Information, 4, "ReadRoutes ended");
             return Count;
         }
 

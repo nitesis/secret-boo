@@ -57,6 +57,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RoutesFactory.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Util\SimpleObjectReader.cs" />
     <Compile Include="Util\SimpleObjectWriter.cs" />
     <Compile Include="Util\TextReaderExtension.cs" />

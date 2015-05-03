@@ -11,8 +11,10 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerConsole
 {
     class RoutePlannerConsoleApp
     {
+        private static TraceSource routesLogger = new TraceSource("Routes");
         static void Main(string[] args)     
         {
+            
             Console.WriteLine("Welcome to RoutePlanner {0}",
                     Assembly.GetExecutingAssembly().GetName().Version);
             var wayPointWindisch = new WayPoint("Windisch", 47.479319847061966, 8.212966918945312);
@@ -28,6 +30,27 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerConsole
             city=cities.FindCity("IstAnbUl");
             Console.WriteLine("{0} {1}", "City Found: ", city.Name);
             Console.ReadKey();
+
+
+
+            //Lab9 a1 c) Console & File Test of Readcities
+            var routes=new Routes();
+            var cities1 = new Cities();
+            cities1.ReadCities("citiesTestDataLab4.txt");
+            IRoutes routes2 = RoutesFactory.Create(cities);
+
+            //Lab9 a1 b) Loading from existing file
+            var count3 = routes.ReadRoutes("linksTestDataLab4.txt");
+
+            //Lab9 a1 b) Writing to file but not to console
+            routesLogger.TraceEvent(TraceEventType.Information, 01, "this should not be on the console");
+
+
+            //Lab9 a1 b) Loding not existing file
+            var count4 = routes.ReadRoutes("linksTestDataLab42.txt");
+
+
+            Console.ReadLine();
         }
 
       

@@ -15,11 +15,13 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         
 
         public List<City> cityList;
+        private static TraceSource FileLog { get; set; }
         public int Count
         {
             get
             {
                 return cityList.Count;
+                
             }
         }
 
@@ -42,6 +44,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         public Cities()
         {
             cityList = new List<City>();
+            FileLog = new TraceSource("Cities");
         }
 
 
@@ -51,6 +54,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             int count = 0;
             using (TextReader reader = new StreamReader(filename))
             {
+                FileLog.TraceEvent(TraceEventType.Information, 1, "ReadCities started");
                 IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
 
                 List<City> result = citiesAsStrings.Select(cs => new City(cs[0].Trim(), cs[1].Trim(),
@@ -61,25 +65,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 cityList = cityList.Concat(result).ToList();
                 count = result.Count();
 
-              /*  List<City> citiesTemp =
-                   citiesAsStrings.Select(
-                       cs => new City(cs[0].Trim(), cs[1].Trim(), int.Parse(cs[2], CultureInfo.InvariantCulture),
-                           double.Parse(cs[3], CultureInfo.InvariantCulture),
-                           double.Parse(cs[4], CultureInfo.InvariantCulture))).ToList();
-                cities = cities.Concat(citiesTemp).ToList();
-                counter = citiesTemp.Count; */
-                
-                /*foreach (string[] cs in citiesAsStrings)
-                {
-                    cityList.Add(new City(cs[0].Trim(), cs[1].Trim(),
-                        int.Parse(cs[2]),
-                    double.Parse(cs[3], CultureInfo.InvariantCulture),
-                    double.Parse(cs[4], CultureInfo.InvariantCulture)));
-
-                    count++;
-                }*/
             }
-            
+            FileLog.TraceEvent(TraceEventType.Information, 2, "ReadCities ended");
             return count;
             
         }
