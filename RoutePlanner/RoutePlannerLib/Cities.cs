@@ -15,7 +15,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         
 
         public List<City> cityList;
-        private static TraceSource FileLog { get; set; }
+        private static TraceSource FileLog =new TraceSource("Cities");
         public int Count
         {
             get
@@ -44,7 +44,6 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         public Cities()
         {
             cityList = new List<City>();
-            FileLog = new TraceSource("Cities");
         }
 
 
@@ -55,6 +54,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             using (TextReader reader = new StreamReader(filename))
             {
                 FileLog.TraceEvent(TraceEventType.Information, 1, "ReadCities started");
+                FileLog.Flush();
                 IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
 
                 List<City> result = citiesAsStrings.Select(cs => new City(cs[0].Trim(), cs[1].Trim(),
@@ -67,6 +67,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
             }
             FileLog.TraceEvent(TraceEventType.Information, 2, "ReadCities ended");
+            FileLog.Flush();
+
             return count;
             
         }

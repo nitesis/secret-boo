@@ -29,25 +29,20 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerConsole
             Console.WriteLine("{0} {1}", "Anzahl eingelesene Städte: ", cities.ReadCities("data/citiesTestDataLab2.txt"));
             city=cities.FindCity("IstAnbUl");
             Console.WriteLine("{0} {1}", "City Found: ", city.Name);
-            Console.ReadKey();
 
 
 
-            //Lab9 a1 c) Console & File Test of Readcities
-            var routes=new Routes();
+            //Lab9
+            //Test of Readcities
             var cities1 = new Cities();
             cities1.ReadCities("citiesTestDataLab4.txt");
-            IRoutes routes2 = RoutesFactory.Create(cities);
+            IRoutes routes= RoutesFactory.Create(cities);
 
-            //Lab9 a1 b) Loading from existing file
-            var count3 = routes.ReadRoutes("linksTestDataLab4.txt");
+            // loading existing file
+            var c = routes.ReadRoutes("linksTestDataLab4.txt");
 
-            //Lab9 a1 b) Writing to file but not to console
+            // Writing to file but not to console
             routesLogger.TraceEvent(TraceEventType.Information, 01, "this should not be on the console");
-
-
-            //Lab9 a1 b) Loding not existing file
-            var count4 = routes.ReadRoutes("linksTestDataLab42.txt");
 
 
             Console.ReadLine();

@@ -49,6 +49,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         public int ReadRoutes(string filename)
         {
             RoutesFileLog.TraceEvent(TraceEventType.Information, 3, "ReadRoutes started");
+            RoutesFileLog.Flush();
+
             try
             {
                 using (TextReader reader = new StreamReader(filename))
@@ -85,9 +87,13 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             catch (FileNotFoundException e)
             {
                 RoutesFileLog.TraceEvent(TraceEventType.Critical, 9, e.ToString());
+                RoutesFileLog.Flush();
+
             }
 
             RoutesFileLog.TraceEvent(TraceEventType.Information, 4, "ReadRoutes ended");
+            RoutesFileLog.Flush();
+
             return Count;
         }
 
