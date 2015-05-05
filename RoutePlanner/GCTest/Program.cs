@@ -11,13 +11,22 @@ namespace GCTest
     {
         static void Main(string[] args)
         {
-            /// GC.collect: 151 ms, MemoryBefore: 168812, MemoryAfter: 105040
-            /// No GC.collect: 47 ms, MemoryBefore: 168812, MemoryAfter: 1005152
-            // the true argument tells the GC to perform a collection first
+            /* gcConcurrent: true, GCCpuGroup false, gcServer: false -> 41 ms */
+
+            /* gcConcurrent: true, GCCpuGroup true, gcServer: false -> 29 ms */
+            /* gcConcurrent: true, GCCpuGroup true, gcServer: true -> 71 ms */
+            /* gcConcurrent: true, GCCpuGroup false, gcServer: true -> 57 ms */
+
+            /* gcConcurrent: false, GCCpuGroup false, gcServer: true -> 40 ms */
+            /* gcConcurrent: false, GCCpuGroup false, gcServer: false -> 73 ms */
+            /* gcConcurrent: false, GCCpuGroup true, gcServer: false -> 55 ms */
+            /* gcConcurrent: false, GCCpuGroup true, gcServer: true -> 62 ms */
+
+            /* Best performance with all default, except: GCCpuGroup = true */
             long memoryUsedBefore = GC.GetTotalMemory(false);
             Stopwatch s = Stopwatch.StartNew();
             generateObject(200);
-            GC.Collect();
+            
             s.Stop();
             Console.WriteLine("Time elapsed: {0} milliseconds", s.ElapsedMilliseconds);
             Console.WriteLine("Total Memory before: {0} and Total Memory after: {1}", memoryUsedBefore, GC.GetTotalMemory(false));
