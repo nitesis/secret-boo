@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util
 {
@@ -21,11 +22,17 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util
         public void Next(Object obj)
         {
             {
+
                 if (stream != null && obj != null)
                 {
                     stream.Write("Instance of " + obj.GetType().FullName + "\r\n");
                     foreach (var p in obj.GetType().GetProperties())
                     {
+                        if (p.GetCustomAttributes(false).Any(a => a is XmlIgnoreAttribute))
+                        {
+                            continue;
+                        }
+
                         var propType = p.GetValue(obj);
                         if (propType is string)
                         {
