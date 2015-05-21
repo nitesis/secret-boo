@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="RoutesDijkstra.cs" />
     <Compile Include="RoutesFactory.cs" />
+    <Compile Include="RoutesFloydWarshall.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Util\SimpleObjectReader.cs" />
     <Compile Include="Util\SimpleObjectWriter.cs" />
