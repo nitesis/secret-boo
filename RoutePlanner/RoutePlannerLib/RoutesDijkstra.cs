@@ -17,6 +17,10 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             return Task.Run(() =>
             {
                 var citiesBetween = cities.FindCitiesBetween(cities.FindCity(fromCity), cities.FindCity(toCity));
+                if (progress != null)
+                {
+                    progress.Report("find cities between done");
+                }
                 if (citiesBetween == null || citiesBetween.Count < 1 || routes == null || routes.Count < 1)
                     return null;
 
@@ -26,13 +30,25 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 Dictionary<City, double> dist;
                 Dictionary<City, City> previous;
                 var q = FillListOfNodes(citiesBetween, out dist, out previous);
+                if (progress != null)
+                {
+                    progress.Report("fill list of nodes done");
+                }
                 dist[source] = 0.0;
 
                 // the actual algorithm
                 previous = SearchShortestPath(mode, q, dist, previous);
+                if (progress != null)
+                {
+                    progress.Report("search shortesd path done");
+                }
 
                 // create a list with all cities on the route
                 var citiesOnRoute = GetCitiesOnRoute(source, target, previous);
+                if (progress != null)
+                {
+                    progress.Report("get cities on route done");
+                }
                 // prepare final list of links
                 return FindPath(citiesOnRoute, mode);
             });
