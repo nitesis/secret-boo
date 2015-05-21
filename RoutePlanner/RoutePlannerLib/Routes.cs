@@ -21,6 +21,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         private static TraceSource RoutesFileLog = new TraceSource("Routes");
         public delegate void RouteRequestHandler(object sender, RouteRequestEventArgs e);
         public event RouteRequestHandler RouteRequestEvent;
+
+        public bool ExecuteParallel { get; set; }
         public int Count
         {
             get { return routes.Count; }

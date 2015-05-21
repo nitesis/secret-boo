@@ -24,7 +24,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         public override List<Link> FindShortestRouteBetween(string fromCity, string toCity,
                                         TransportModes mode)
         {
-            List<City> cities = FindCitiesBetween(fromCity, toCity);
+            List<City> cities = base.cities.FindCitiesBetween(
+                base.cities.FindCity(fromCity), base.cities.FindCity(toCity));
             if (cities == null || cities.Count < 1)
                 return null;
 
