@@ -110,7 +110,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
         public void TestTask3CompareAlgorithms()
         {
             //IGNORE THIS TEST - ITS UNRELIABLE
-            /*
+            
             Cities cities = new Cities();
 
             cities.ReadCities(@"citiesTestDataLab10.txt");
@@ -125,7 +125,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
 
             // the sequential version should be slower
             Assert.IsTrue(floydWarshallTime > dijkstraTime, "FloydWarshal should be slower");
-            */
+            
         }
 
         private long FindRoutes(Routes routes)
