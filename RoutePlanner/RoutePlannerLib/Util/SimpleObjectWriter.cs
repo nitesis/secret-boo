@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -36,7 +37,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util
                         var propType = p.GetValue(obj);
                         if (propType is string)
                         {
-                            stream.Write(p.Name + "=\"" + p.GetValue(obj) + "\"\r\n");
+                            stream.Write(p.Name + "=\"" + double.Parse(p.GetValue(obj).ToString(), CultureInfo.InvariantCulture) + "\"\r\n");
                         }
                         else
                             if (propType is System.ValueType)
