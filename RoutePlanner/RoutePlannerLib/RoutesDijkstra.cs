@@ -12,7 +12,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         public RoutesDijkstra (Cities c):base(c) {}
         #region Lab04: Dijkstra implementation
 
-        public override Task<List<Link>> FindShortestRouteBetweenAsync(string fromCity, string toCity, TransportModes mode, Progress<string> progress)
+        public override Task<List<Link>> FindShortestRouteBetweenAsync(string fromCity, string toCity, TransportModes mode, IProgress<string> progress)
         {
             return Task.Run(() =>
             {
