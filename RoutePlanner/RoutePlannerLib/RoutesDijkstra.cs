@@ -11,27 +11,37 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         // Konstruktor ruft Routes auf
         public RoutesDijkstra (Cities c):base(c) {}
         #region Lab04: Dijkstra implementation
-        public List<Link> FindShortestRouteBetween(City fromCity, City toCity, TransportModes mode)
+
+        public override Task<List<Link>> FindShortestRouteBetweenAsync(string fromCity, string toCity, TransportModes mode, Progress<string> progress)
         {
-            var citiesBetween = cities.FindCitiesBetween(fromCity, toCity);
-            if (citiesBetween == null || citiesBetween.Count < 1 || routes == null || routes.Count < 1)
-                return null;
+            return Task.Run(() =>
+            {
+                var citiesBetween = cities.FindCitiesBetween(cities.FindCity(fromCity), cities.FindCity(toCity));
+                if (citiesBetween == null || citiesBetween.Count < 1 || routes == null || routes.Count < 1)
+                    return null;
 
-            var source = citiesBetween[0];
-            var target = citiesBetween[citiesBetween.Count - 1];
+                var source = citiesBetween[0];
+                var target = citiesBetween[citiesBetween.Count - 1];
 
-            Dictionary<City, double> dist;
-            Dictionary<City, City> previous;
-            var q = FillListOfNodes(citiesBetween, out dist, out previous);
-            dist[source] = 0.0;
+                Dictionary<City, double> dist;
+                Dictionary<City, City> previous;
+                var q = FillListOfNodes(citiesBetween, out dist, out previous);
+                dist[source] = 0.0;
 
-            // the actual algorithm
-            previous = SearchShortestPath(mode, q, dist, previous);
+                // the actual algorithm
+                previous = SearchShortestPath(mode, q, dist, previous);
 
-            // create a list with all cities on the route
-            var citiesOnRoute = GetCitiesOnRoute(source, target, previous);
-            // prepare final list of links
-            return FindPath(citiesOnRoute, mode);
+                // create a list with all cities on the route
+                var citiesOnRoute = GetCitiesOnRoute(source, target, previous);
+                // prepare final list of links
+                return FindPath(citiesOnRoute, mode);
+            });
+            
+        }
+        public override List<Link> FindShortestRouteBetween(string fromCity, string toCity,
+                                              TransportModes mode)
+        {
+            return FindShortestRouteBetweenAsync(fromCity, toCity, mode, null).Result;
         }
 
         public List<Link> FindPath(List<City> cityList, TransportModes mode)
@@ -179,15 +189,5 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         }
         #endregion
-
-        public override List<Link> FindShortestRouteBetween(string fromCity, string toCity,
-                                        TransportModes mode)
-        {
-
-            NotifyObservers(fromCity, toCity, mode);
-            City cityFrom = cities.FindCity(fromCity);
-            City cityTo = cities.FindCity(toCity);
-            return FindShortestRouteBetween(cityFrom, cityTo, mode);
-        }
     }
 }

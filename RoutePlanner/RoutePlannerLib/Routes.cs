@@ -103,6 +103,15 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
 
         public abstract List<Link> FindShortestRouteBetween(string cityFrom, string cityTo, TransportModes mode);
 
+        public Task<List<Link>> FindShortestRouteBetweenAsync(string cityFrom, string cityTo, TransportModes mode) 
+        {
+            return FindShortestRouteBetweenAsync(cityFrom, cityTo, mode, null);
+        }
+
+        public abstract Task<List<Link>> FindShortestRouteBetweenAsync(string cityFrom, string cityTo, TransportModes mode, Progress<string> progress);
+        
+            
+        
         public void NotifyObservers(string cityFrom, string cityTo, TransportModes mode)
         {
             if (RouteRequestEvent != null)
