@@ -21,46 +21,52 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         {
         }
 
-
         public override List<Link> FindShortestRouteBetween(string fromCity, string toCity,
-                                        TransportModes mode)
+                                              TransportModes mode)
         {
-         
-            List<City> cities = base.cities.FindCitiesBetween(
-                base.cities.FindCity(fromCity), base.cities.FindCity(toCity));
-            if (cities == null || cities.Count < 1)
-                return null;
+            return FindShortestRouteBetweenAsync(fromCity, toCity, mode, null).Result;
+        }
 
-            List<Link> links = FindAllLinks(cities, mode);
-            if (links == null || links.Count < 1)
-                return null;
+        public override Task<List<Link>> FindShortestRouteBetweenAsync(string fromCity, string toCity, TransportModes mode, IProgress<string> progress)
+        {
 
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
-            long ts0 = stopWatch.ElapsedMilliseconds;
-
-            Setup(cities, links);
-
-            City source = FindCity(fromCity, cities);
-            City target = FindCity(toCity, cities);
-            if (D[source.Index, target.Index] == Double.MaxValue)
-                return new List<Link>(); // no path between source and target
-
-            List<City> path = GetIntermediatePath(source, target);
-
-            // must construct route from path
-            var route = new List<Link>();
-            route.Add(new Link(source, path.ElementAt(0), D[source.Index, path.ElementAt(0).Index]));
-            for (var i = 0; i < path.Count - 1; i++)
+            return Task.Run(() =>
             {
-                City from = path.ElementAt(i);
-                City to = path.ElementAt(i + 1);
-                route.Add(new Link(from, to, D[from.Index, to.Index]));
-            }
-            route.Add(new Link(path.ElementAt(path.Count - 1), target,
-                                D[path.ElementAt(path.Count - 1).Index, target.Index]));
-            return route;
+                List<City> cities = base.cities.FindCitiesBetween(
+                    base.cities.FindCity(fromCity), base.cities.FindCity(toCity));
+                if (cities == null || cities.Count < 1)
+                    return null;
 
+                List<Link> links = FindAllLinks(cities, mode);
+                if (links == null || links.Count < 1)
+                    return null;
+
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
+                long ts0 = stopWatch.ElapsedMilliseconds;
+
+                Setup(cities, links);
+
+                City source = FindCity(fromCity, cities);
+                City target = FindCity(toCity, cities);
+                if (D[source.Index, target.Index] == Double.MaxValue)
+                    return new List<Link>(); // no path between source and target
+
+                List<City> path = GetIntermediatePath(source, target);
+
+                // must construct route from path
+                var route = new List<Link>();
+                route.Add(new Link(source, path.ElementAt(0), D[source.Index, path.ElementAt(0).Index]));
+                for (var i = 0; i < path.Count - 1; i++)
+                {
+                    City from = path.ElementAt(i);
+                    City to = path.ElementAt(i + 1);
+                    route.Add(new Link(from, to, D[from.Index, to.Index]));
+                }
+                route.Add(new Link(path.ElementAt(path.Count - 1), target,
+                                    D[path.ElementAt(path.Count - 1).Index, target.Index]));
+                return route;
+            });
         }
 
         private List<Link> FindAllLinks(List<City> cities, TransportModes mode)
