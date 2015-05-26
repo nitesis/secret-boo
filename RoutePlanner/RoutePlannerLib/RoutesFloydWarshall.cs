@@ -34,15 +34,27 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             {
                 List<City> cities = base.cities.FindCitiesBetween(
                     base.cities.FindCity(fromCity), base.cities.FindCity(toCity));
+                if (progress != null)
+                {
+                    progress.Report("find cities between done");
+                }
                 if (cities == null || cities.Count < 1)
                     return null;
 
                 List<Link> links = FindAllLinks(cities, mode);
+                if (progress != null)
+                {
+                    progress.Report("find all links done");
+                }
                 if (links == null || links.Count < 1)
                     return null;
 
                 var stopWatch = new Stopwatch();
                 stopWatch.Start();
+                if (progress != null)
+                {
+                    progress.Report("start stopwatch done");
+                }
                 long ts0 = stopWatch.ElapsedMilliseconds;
 
                 Setup(cities, links);
@@ -53,6 +65,10 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                     return new List<Link>(); // no path between source and target
 
                 List<City> path = GetIntermediatePath(source, target);
+                if (progress != null)
+                {
+                    progress.Report("get intermediate path done");
+                }
 
                 // must construct route from path
                 var route = new List<Link>();
@@ -65,6 +81,10 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                 }
                 route.Add(new Link(path.ElementAt(path.Count - 1), target,
                                     D[path.ElementAt(path.Count - 1).Index, target.Index]));
+                if (progress != null)
+                {
+                    progress.Report("route from path done");
+                }
                 return route;
             });
         }
