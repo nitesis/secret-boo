@@ -13,7 +13,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         #region Lab04: Dijkstra implementation
 
         public override Task<List<Link>> FindShortestRouteBetweenAsync(string fromCity, string toCity, TransportModes mode, IProgress<string> progress)
-        {   
+        {
+            NotifyObservers(fromCity, toCity, mode);
             return Task.Run(() =>
             {
                 var citiesBetween = cities.FindCitiesBetween(cities.FindCity(fromCity), cities.FindCity(toCity));

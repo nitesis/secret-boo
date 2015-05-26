@@ -37,24 +37,24 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util
                         var propType = p.GetValue(obj);
                         if (propType is string)
                         {
-                            stream.Write(p.Name + "=\"" + double.Parse(p.GetValue(obj).ToString(), CultureInfo.InvariantCulture) + "\"\r\n");
+                            stream.WriteLine(p.Name + "=\"" + p.GetValue(obj) + "\"", CultureInfo.InvariantCulture);
                         }
                         else
                             if (propType is System.ValueType)
                             {
 
-                                string s = p.Name + "=" + p.GetValue(obj) + "\r\n";
-                                s=s.Replace(",", ".");
-                                stream.Write(s);
+                                string s = p.Name + "=" + p.GetValue(obj);
+                                
+                                stream.WriteLine(s, CultureInfo.InvariantCulture);
                             }
 
                         else
                            {
-                            stream.Write(p.Name + " is a nested object...\r\n");
+                               stream.WriteLine(p.Name + " is a nested object...", CultureInfo.InvariantCulture);
                             this.Next(p.GetValue(obj));
                            }
                     }
-                    stream.Write("End of instance\r\n");
+                    stream.WriteLine("End of instance", CultureInfo.InvariantCulture);
                 }
             }
         }
