@@ -15,7 +15,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         
 
         public List<City> cityList;
-        private static TraceSource FileLog =new TraceSource("Cities");
+        private static TraceSource FileLog = new TraceSource("Cities");
         public int Count
         {
             get
@@ -51,23 +51,33 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
         public int ReadCities(string filename)
         {
             int count = 0;
-            using (TextReader reader = new StreamReader(filename))
+
+            try
             {
-                FileLog.TraceEvent(TraceEventType.Information, 1, "ReadCities started");
+                using (TextReader reader = new StreamReader(filename))
+                {
+                    FileLog.TraceEvent(TraceEventType.Information, 1, "ReadCities started");
+                    FileLog.Flush();
+                    IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
+
+                    List<City> result = citiesAsStrings.Select(cs => new City(cs[0].Trim(), cs[1].Trim(),
+                            int.Parse(cs[2]),
+                        double.Parse(cs[3], CultureInfo.InvariantCulture),
+                        double.Parse(cs[4], CultureInfo.InvariantCulture))).ToList();
+
+                    cityList = cityList.Concat(result).ToList();
+                    count = result.Count();
+
+                }
+                FileLog.TraceEvent(TraceEventType.Information, 2, "ReadCities ended");
                 FileLog.Flush();
-                IEnumerable<string[]> citiesAsStrings = reader.GetSplittedLines('\t');
-
-                List<City> result = citiesAsStrings.Select(cs => new City(cs[0].Trim(), cs[1].Trim(),
-                        int.Parse(cs[2]),
-                    double.Parse(cs[3], CultureInfo.InvariantCulture),
-                    double.Parse(cs[4], CultureInfo.InvariantCulture))).ToList();
-
-                cityList = cityList.Concat(result).ToList();
-                count = result.Count();
-
             }
-            FileLog.TraceEvent(TraceEventType.Information, 2, "ReadCities ended");
-            FileLog.Flush();
+            catch (FileNotFoundException e)
+            {
+                FileLog.TraceEvent(TraceEventType.Critical, 3, e.ToString());
+                return 0;
+            }
+           
 
             return count;
             
