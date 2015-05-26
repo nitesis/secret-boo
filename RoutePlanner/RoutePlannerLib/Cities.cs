@@ -53,7 +53,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             int count = 0;
 
             try
-            {
+            { 
                 using (TextReader reader = new StreamReader(filename))
                 {
                     FileLog.TraceEvent(TraceEventType.Information, 1, "ReadCities started");
@@ -76,7 +76,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
             {
                 FileLog.TraceEvent(TraceEventType.Critical, 3, e.ToString());
                 return 0;
-            }
+            } 
            
 
             return count;
