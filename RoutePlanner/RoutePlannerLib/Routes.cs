@@ -75,8 +75,8 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib
                     {
                         fromCity = cs[0];
                         toCity = cs[1];
-                        city1 = cities.FindCity(fromCity);
-                        city2 = cities.FindCity(toCity);
+                        city1 = cities.FindCity(fromCity.Trim());
+                        city2 = cities.FindCity(toCity.Trim());
 
                         if ((city1 != null) && (city2 != null))
                         {
