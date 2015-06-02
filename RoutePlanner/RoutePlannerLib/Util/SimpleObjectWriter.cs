@@ -43,7 +43,16 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util
                             if (propType is System.ValueType)
                             {
 
-                                string s = p.Name + "=" + p.GetValue(obj);
+                                Object temp = p.GetValue(obj);
+                               // string objString = p.GetValue(obj).ToString();
+                                string s ;
+                                if (temp is float)
+                                    s = p.Name + "=" + ((float)temp).ToString(CultureInfo.InvariantCulture);
+                                else if (temp is double)
+                                    s = p.Name + "=" + ((double)temp).ToString(CultureInfo.InvariantCulture);
+                                else
+                                 s = p.Name + "=" + p.GetValue(obj);
+
                                 
                                 stream.WriteLine(s, CultureInfo.InvariantCulture);
                             }

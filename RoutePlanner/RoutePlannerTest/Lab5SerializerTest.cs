@@ -3,13 +3,16 @@ using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib;
 using System.IO;
 using Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util;
 using System;
-
+using System.Globalization;
+using System.Threading;
 
 namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
 {
     [TestClass]
     public class Lab5DeSerializerTest
     {
+
+
         [TestMethod]
         public void TestSerializeSingleCityWithValues()
         {
@@ -53,6 +56,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerTest
         [TestMethod]
         public void TestDeserializeSingleCityWithValues()
         {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-DE");
             var expectedCity = new City("Aarau", "Switzerland", 10, 1.1, 2.2);
             var stream = new StringReader(CityWithValues);
             var reader = new SimpleObjectReader(stream);

@@ -60,7 +60,7 @@ namespace Fhnw.Ecnf.RoutePlanner.RoutePlannerLib.Util
 
                                         prpinfo.SetValue(obj, double.Parse(stringSplit[1], NumberStyles.Float, CultureInfo.InvariantCulture));
                                     }
-                                    else if (prpinfo.GetValue(obj) is Int32)
+                                    else if (prpinfo.GetValue(obj) is int)
                                     {
                                         prpinfo.SetValue(obj, int.Parse(stringSplit[1], NumberStyles.Integer, CultureInfo.InvariantCulture));
                                     }
